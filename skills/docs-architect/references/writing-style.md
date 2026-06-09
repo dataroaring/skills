@@ -156,7 +156,7 @@ For VeloDB Cloud, apply the same pattern to:
 
 Stripe's code comment pattern is consistent and worth copying:
 
-```python
+```text
 # Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
 # Find your keys at https://dashboard.stripe.com/apikeys.
 client = Stripe::StripeClient.new('<stripe-secret-key>')
@@ -175,7 +175,7 @@ This makes the code block self-sufficient: a reader who copies just the code (no
 - Don't comment what the code obviously does. Comment what the reader can't see.
 
 **Bad** (comments restate the code):
-```python
+```text
 # Create a Stripe client
 client = Stripe::StripeClient.new('<stripe-secret-key>')
 # Create a session
@@ -183,7 +183,7 @@ session = client.v1.checkout.sessions.create(...)
 ```
 
 **Good** (comments add what the code can't show):
-```python
+```text
 # Find your keys at https://dashboard.stripe.com/apikeys
 client = Stripe::StripeClient.new('<stripe-secret-key>')
 

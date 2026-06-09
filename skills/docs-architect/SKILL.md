@@ -267,7 +267,7 @@ The default mode is **conversational judgment**, not template-filling. When the 
 4. Note tradeoffs (no decision is purely one-sided).
 
 Avoid:
-- Reciting all 7 principles when only 1 is relevant.
+- Reciting all 8 principles when only 1 is relevant.
 - Mechanically applying templates when the user wants to think.
 - Treating principles as MUSTs rather than as decision aids.
 
@@ -285,7 +285,7 @@ Avoid:
 
 ## Tools
 
-- `scripts/check_vocab.py` — Vocabulary linter. Checks four categories: (a) "thesaurus verbs" with simpler equivalents (utilize → use), (b) likely action verbs with Zipf frequency < 4.0, (c) **contractual adjectives** ("stable", "production-ready", "backward-compatible", "low-latency", etc.) that need concrete definitions on the page (Rule 14), and (d) **mixed modal verb strength** (warns when "must" / "should" / "recommend" / "can" / "may" are mixed within one page without intent, see Rule 20). Also flags Rule 16 violations like "Welcome to..." or "This page covers..." page openings. Usage: `python check_vocab.py <file.md>` or `python check_vocab.py - < draft.md`. Requires `pip install wordfreq`. **Use this on any non-trivial English draft before review.** Exit code 1 means hard violations (banned phrases) found; soft warnings don't fail.
+- `scripts/check_vocab.py` — Vocabulary linter. Checks four categories: (a) "thesaurus verbs" with simpler equivalents (utilize → use), (b) likely action verbs with Zipf frequency < 4.0, (c) **contractual adjectives** ("stable", "production-ready", "backward-compatible", "low-latency", etc.) that need concrete definitions on the page (Rule 14), and (d) **mixed modal verb strength** (warns when "must" / "should" / "recommend" / "can" / "may" are mixed within one page without intent, see Rule 20). Also flags Rule 16 violations like "Welcome to..." or "This page covers..." page openings. Usage: `python scripts/check_vocab.py <file.md>` or `python scripts/check_vocab.py - < draft.md`. Requires `pip install wordfreq`. **Use this on any non-trivial English draft before review.** Exit code 1 means hard violations (banned phrases) found; soft warnings don't fail.
 
 For pure IA decisions or principle-level judgment, the body of this file is usually enough.
 

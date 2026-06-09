@@ -1,31 +1,36 @@
 #!/usr/bin/env python3
 """check_vocab.py — Vocabulary check for English documentation drafts.
 
-Flags two categories of issues:
+Checks four categories of issues:
 
-1. Low-frequency action verbs (Zipf < 4.5). These signal "thesaurus-style" 
-   writing where a more common verb would work. The threshold matches what
-   actual Stripe docs use for action verbs (create, send, set, use, etc.).
-
-2. Banned "formal English" verbs and phrases (utilize, initiate, leverage,
+1. Banned "formal English" verbs and phrases (utilize, initiate, leverage,
    commence, subsequently, in order to, etc.). These have higher-frequency
    replacements that always work in technical docs.
+
+2. Low-frequency action verbs (Zipf < 4.0). These signal "thesaurus-style"
+   writing where a more common verb may work.
+
+3. Contractual adjectives (stable, production-ready, backward-compatible,
+   etc.) that need concrete definitions on the page.
+
+4. Mixed modal strength (must, should, recommend, can, may) that may signal
+   inconsistent obligation levels.
 
 Technical nouns (webhook, payload, asynchronous, etc.) are NOT flagged
 even when low-frequency. Only words tagged as verbs (or known formal-verb
 strings) are flagged.
 
 USAGE:
-    python check_vocab.py <file.md>
-    python check_vocab.py - < draft.md         # read from stdin
-    echo "Please utilize the API" | python check_vocab.py -
+    python scripts/check_vocab.py <file.md>
+    python scripts/check_vocab.py - < draft.md         # read from stdin
+    echo "Please utilize the API" | python scripts/check_vocab.py -
 
 REQUIREMENTS:
     pip install wordfreq
 
 EXIT CODES:
-    0 — no issues found
-    1 — issues found (use this in pre-commit hooks)
+    0 — no hard violations found; soft warnings may still print
+    1 — banned phrases found
     2 — usage error
 """
 
@@ -241,14 +246,14 @@ def is_likely_verb(word):
         return False
     if w in TECHNICAL_TERMS_ALLOWLIST:
         return False
-    return any(w.endswith(suf) for suf in VERB_ENDINGS) or len(w) <= 7
+    return any(w.endswith(suf) for suf in VERB_ENDINGS)
 
 
 def read_input(arg):
     if arg == "-":
         return sys.stdin.read()
     try:
-        with open(arg) as f:
+        with open(arg, encoding="utf-8") as f:
             return f.read()
     except FileNotFoundError:
         print(f"ERROR: file not found: {arg}", file=sys.stderr)

@@ -92,7 +92,7 @@ This implements Principle 5 (docs as product funnel) for the VeloDB context.
 VeloDB docs serve two primary audiences:
 
 1. **NA enterprise evaluators** — comparing against Snowflake, Databricks, ClickHouse Cloud. They care about: enterprise security, pricing transparency, integrations, SLAs. Language: formal, precise, NA SaaS conventions.
-2. **Existing Doris/OSS users** migrating to managed** — they know the engine, need to learn the control plane. Language: assumes Doris knowledge, focuses on what's *different* in Cloud.
+2. **Existing Doris/OSS users** migrating to managed cloud — they know the engine, need to learn the control plane. Language: assumes Doris knowledge, focuses on what's *different* in Cloud.
 
 When writing, ask which audience the page primarily serves. Don't try to serve both in one page; cross-link instead.
 
