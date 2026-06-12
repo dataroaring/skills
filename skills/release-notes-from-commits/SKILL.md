@@ -48,6 +48,8 @@ The bar is **user-observable impact**. A user reading the note should be able to
 - Pure refactors, test/CI/build/docker/regression/compile changes, dependency bumps, chores.
 - Capabilities present in the upstream **core** but **not exposed in the product**. When unsure, ask the user or flag it; do not assume a core feature ships in the product.
 
+**Maintenance releases.** If, after classification, a version has no user-facing changes (only internal plumbing such as async file close or latency recording), do **not** invent a vague benefit like "Improved write responsiveness during data ingestion" that a reader cannot interpret. State it plainly instead: "This is a maintenance release with internal stability and performance improvements. No user-facing changes." Honesty beats a hollow bullet.
+
 **Product-availability filtering (critical for VeloDB Cloud):** some upstream features are not enabled in the cloud product. Past reviewer guidance on this project:
 - Do **not** mention **TLS / mTLS / certificate-based authentication / LDAPS** (not supported in the product). The LDAP injection-hardening *fix* can stay as a bug fix, but drop "LDAPS support".
 - Do **not** mention the **enterprise license module** or other enterprise-only machinery.
