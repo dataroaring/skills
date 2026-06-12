@@ -71,6 +71,14 @@ Other patterns:
 
 When the commit subject is too terse to state the condition, **read the upstream PR** (for example `https://github.com/apache/doris/pull/<n>`) to learn the real trigger. Verify rather than guess: in one case a "wrong result" fix was actually a query *failure*, and the note had to be corrected. If the trigger truly cannot be pinned down, state it at the feature level (for example "if you extract string values from JSON") rather than inventing specifics.
 
+## Every line must let a customer self-assess
+
+Both improvements and bug fixes must name the **user-visible surface** (a function, statement, table type, catalog, or query shape), so a reader can tell whether it applies to them. Apply the same test to improvements that you apply to bug fixes.
+
+- **No non-actionable catch-alls.** "Improved overall stability in cloud environments" or "Fixed several rare crashes in cloud read operations" tell a customer nothing they can match against their workload. Either make them specific (name the operation) or drop them. A bundle of internal crash fixes with no single user-identifiable trigger should be dropped, not summarized into a hollow line.
+- **Name who benefits, not the mechanism.** Prefer "Improved the performance of large table scans" over "Improved scan performance through data prefetching"; "Improved the performance of queries that sort data or run large joins and aggregations" over "faster full sorting and data shuffling"; "Improved storage and compaction efficiency for wide tables with many sparse columns" over "Added a compaction optimization for sparse wide tables". Mechanism words like prefetching, shuffle, file cache, LRU, peer read are internal; translate them to the query or table scenario the customer would recognize.
+- **Verify a one-line `[opt]` before claiming a fix.** A terse optimization commit (for example `isForceDropPartition()` flipped from false to true) often has no clear user-visible effect. Read the diff; if you cannot state a concrete user impact, leave it out rather than inventing one (such as "reliably replaces stale rows").
+
 ## Writing style
 
 - **Whole sentences** in prose and bullets; not keyword fragments or `(a, b, c)` term dumps. Reference tables may stay terse.
