@@ -45,6 +45,7 @@ The bar is **user-observable impact**. A user reading the note should be able to
 **Exclude (internal implementation / plumbing):**
 - File cache internals, peer read, warm-up internals, recycler, meta-service RPC counts, FoundationDB, bthread, segment footer, memtable/segment memory internals, LRU mechanics.
 - Logging verbosity, internal-only metrics, and observability that requires no user action.
+- Internal configuration knobs and tuning parameters that are not surfaced to customers (for example an internal storage-client rate limiter). A commit tagged `[Enhancement](client)` or that "supports changing X config dynamically" is usually an internal knob, not a customer setting. If a customer cannot see or set it, leave it out.
 - Pure refactors, test/CI/build/docker/regression/compile changes, dependency bumps, chores.
 - Capabilities present in the upstream **core** but **not exposed in the product**. When unsure, ask the user or flag it; do not assume a core feature ships in the product.
 
