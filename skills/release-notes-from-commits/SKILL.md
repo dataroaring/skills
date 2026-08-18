@@ -55,7 +55,8 @@ The bar is **user-observable impact**. A user reading the note should be able to
 - Do **not** mention **TLS / mTLS / certificate-based authentication / LDAPS** (not supported in the product). The LDAP injection-hardening *fix* can stay as a bug fix, but drop "LDAPS support".
 - Do **not** mention the **enterprise license module** or other enterprise-only machinery.
 - Drop vendor-specific storage that is not the product's cloud (for example **Aliyun KMS**, **Apache Ozone**, and **DLF over OSS-HDFS** are Alibaba/OSS-oriented and not shown for the AWS-based product). Keep the generic part of such a line (for example Paimon REST catalog and partition data types).
-- When the upstream page lists something you must exclude (such as LDAPS), say so to the user rather than silently keeping it.
+- Drop **region-specific connectors and databases that are not sold in the target market**. VeloDB Cloud targets the North America (NA) market, so China-market-only integrations do not ship there: for example a **Dameng (DM) JDBC catalog**, **OceanBase**, **TDSQL**, **GaussDB**, **Huawei OBS**, and similar. When a commit adds one of these, leave it out even though it is a real, generic-looking catalog or CDC source.
+- When the upstream page or a commit lists something you must exclude (such as LDAPS or a Dameng catalog), say so to the user rather than silently keeping it, and confirm market availability when a connector's region is unclear.
 
 ## Bug fixes must answer "Am I affected?"
 
